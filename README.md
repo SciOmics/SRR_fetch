@@ -7,3 +7,5 @@ Arguments:
 
 Example usage: 
 sh download_srr.sh SRR_Acc_List.txt ~/Documents/demo_folder
+
+Be sure you have pigz and sra-tools installed. 
