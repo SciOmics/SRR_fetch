@@ -1,5 +1,5 @@
 # SRR_fetch
-Script for easily downloading, converting, and compressing SSR files from NCBI
+Script for easily downloading, converting, and compressing SRR files from NCBI
 
 Arguments: 
 1) File with SRR accession numbers
