@@ -14,15 +14,24 @@ FASTQ_FOLDER="$OUTPUT_FOLDER/fastq"
 # Detect operating system and set the number of processors
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     # Linux OS
-    NUM_PROCESSORS=$(nproc --ignore=1)
+    TOTAL_PROCESSORS=$(nproc)
+    NUM_PROCESSORS=$((TOTAL_PROCESSORS / 2))
 elif [[ "$OSTYPE" == "darwin"* ]]; then
     # macOS
     TOTAL_CPUS=$(sysctl -n hw.ncpu)
-    NUM_PROCESSORS=$((TOTAL_CPUS - 1))
+    NUM_PROCESSORS=$((TOTAL_CPUS / 2))
 else
     echo "Unsupported OS"
     exit 1
 fi
+
+# Make sure we use at least one processor
+if [ "$NUM_PROCESSORS" -lt 1 ]; then
+    NUM_PROCESSORS=1
+fi
+
+
+echo "Using $NUM_PROCESSORS processors"
 
 # Create output folder if it doesn't exist
 if [ ! -d "$FASTQ_FOLDER" ]; then
