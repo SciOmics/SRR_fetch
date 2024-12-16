@@ -11,6 +11,20 @@ SRR_ID_FILE="$1"
 OUTPUT_FOLDER="$2"
 FASTQ_FOLDER="$OUTPUT_FOLDER/fastq"
 
+
+# Function to check if required commands are installed
+check_dependencies() {
+    for cmd in prefetch fasterq-dump pigz; do
+        if ! command -v "$cmd" &> /dev/null; then
+            echo "Error: $cmd is not installed or not in your PATH."
+            exit 1
+        fi
+    done
+}
+
+# Call the function to check dependencies
+check_dependencies
+
 # Detect operating system and set the number of processors
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     TOTAL_PROCESSORS=$(nproc)
