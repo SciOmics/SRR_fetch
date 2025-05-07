@@ -86,7 +86,7 @@ process_srr_id() {
     fi
 
     # Check if .fastq.gz files exist and remove the prefetch folder if they do
-    if ls "$FASTQ_FOLDER/${SRR_ID}*.fastq.gz" 1> /dev/null 2>&1; then
+    if [ -f "$FASTQ_FOLDER/${SRR_ID}_1.fastq.gz" ] && [ -f "$FASTQ_FOLDER/${SRR_ID}_2.fastq.gz" ]; then
         echo ".fastq.gz files found for $SRR_ID, removing prefetch folder"
         rm -rf "$OUTPUT_FOLDER/$SRR_ID"
     else

@@ -74,11 +74,11 @@ while read -r SSR_ID; do
       "$FASTQ_FOLDER/${SSR_ID}_1.fastq" "$FASTQ_FOLDER/${SSR_ID}_2.fastq"
 
     # Check if .fastq.gz files exist and remove the prefetch folder if they do
-    if ls "$FASTQ_FOLDER/${SSR_ID}*.fastq.gz" 1> /dev/null 2>&1; then
-        echo ".fastq.gz files found for $SSR_ID, removing prefetch folder"
-        rm -rf "$OUTPUT_FOLDER/$SSR_ID"
+    if [ -f "$FASTQ_FOLDER/${SRR_ID}_1.fastq.gz" ] && [ -f "$FASTQ_FOLDER/${SRR_ID}_2.fastq.gz" ]; then
+        echo ".fastq.gz files found for $SRR_ID, removing prefetch folder"
+        rm -rf "$OUTPUT_FOLDER/$SRR_ID"
     else
-        echo "No .fastq.gz files found for $SSR_ID, keeping prefetch folder"
+        echo "No .fastq.gz files found for $SRR_ID, keeping prefetch folder"
     fi
 
     # End the timer
